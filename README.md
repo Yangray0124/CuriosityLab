@@ -11,6 +11,13 @@ Open `index.html` in a browser (all files must remain together), or use `python 
 - **Human experiment:** 36 shuffled, curated topics across science, daily life, psychology, history, language, design, computing and other fields. Each trial shows a recommended presentation, collects interest, offers optional exploration, and asks a transfer/comprehension question. Data remain in browser local storage and can be exported as JSON. The first four trials use random initialization; later trials use GP-UCB. Reset clears observations.
 - **Synthetic benchmark:** compare BO with uniform random search using matched seeds, profiles, and noise sequences; export the curve as CSV. The synthetic response is deliberately simple, not a fitted human model.
 
+## Visitor experience (v0.3)
+
+- First-time onboarding explains the research question and the three steps of each trial.
+- Each visitor has separate, browser-local progress. The app saves completed observations, shuffled topic order, and unfinished trial state (including feedback, opened cards and quiz order). Reloading resumes that state; old v1 completed observations are retained.
+- No sign-in or server is used. Progress is not synchronized across browsers or devices, and a shared browser shares its local data. Clearing site data or using private browsing may discard it; JSON export remains available.
+- After four initial observations the dashboard shows the top three GP-predicted strategies, uncertainty, and an explanation of how each completed trial updates the model. These scores are not grades or validated psychological measurements. The BO algorithm, design space, and benchmark are unchanged.
+
 ## Topic expansion (v0.2)
 
 The original eight topics are retained and 28 new topics are added. Each session shuffles the complete pool, with quiz choices also shuffled. A session can be resumed using local browser storage; existing v1 observations remain usable. This is a curated offline prototype, not a live AI-generated knowledge feed. Human outcomes are not yet validated.
@@ -38,7 +45,7 @@ There are 36 possible configurations. The score is `0.2*C + 0.4*E + 0.4*L`, wher
 - 36 topics allow up to 32 adaptive observations per session; topic difficulty, prior knowledge, and learning carryover are not controlled. Do not infer a robust personal optimum from this pilot.
 - A low-disclosure teaser may still reveal the answer implicitly (e.g. direct definitions). The manipulation is an operational approximation, not a validated psychological information-gap measure.
 - Optional link count changes exploration opportunity; the binary E metric avoids directly rewarding more clicks but does not eliminate this confound.
-- Current dashboard shows strategy labels, potentially introducing demand effects. Future blinded study should hide them and use matched topic sets, baseline knowledge, delayed transfer tests, and consented participants.
+- The dashboard shows predicted strategies and completed trial labels, potentially introducing demand effects. Future blinded study should hide them and use matched topic sets, baseline knowledge, delayed transfer tests, and consented participants.
 - Future contextual BO could model topic and prior knowledge; multi-objective BO could expose the trade-off between interest, exploration, and learning without fixed weights.
 
 ## Files
